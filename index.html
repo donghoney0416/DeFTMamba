@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array geometry agnostic multichannel speech enhancement</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 10px;
+        }
+        header {
+            text-align: center;
+            padding: 1px;
+            background-color: #f2f2f2;
+        }
+        .paper_figure img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+        .result_table img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+        .real_experiment img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+        .demo img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+        .simulated img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+        .spectrogram img {
+            height: 120px;
+            display: block;
+            margin: 0 auto;
+        }
+        .sample_imag img {
+            width: 225px;
+            display: block;
+            margin: 0 auto;
+        }
+        .audio-control {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <header>
+            <h1>DeFTAN-AA: Array geometry agnostic <br> multichannel speech enhancement<br>[ <a href="https://drive.google.com/file/d/1V-At97d8S8PyoD66rHIKIe-IcG5KpiN_/view?usp=drive_link"
+                    target="_blank">Paper</a> | <a href="https://drive.google.com/file/d/1TgMJ4JDsE8atqkAn3w5hWQDvp4nC3r5s/view?usp=drive_link"
+                    target="_blank">Video</a> ]</h1>
+        </header>
+        <p>
+            <b>Dongheon Lee</b><sup>1</sup>, and <b>Jung-Woo Choi</b><sup>1</sup><br>
+            <sup>1</sup>School of Electrical Engineering, Korea Advanced Institute of Science and Technology (KAIST),
+            Daejeon, Republic of Korea
+        </p>
+    </center>
+    <left>
+        <tr>
+            <td>
+                <div class="paper_figure">
+                    <img src="src/fig/Diagram.png" alt="overview"><br>
+                </div>
+
+                <hr>
+                <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
+
+                <hr>
+                <details>
+                <br>
+                <summary><strong>Overall architecture</strong> (click to expand) </summary>
+                <div class="result_table">
+                    <img src = "src/fig/overview.png"> <br>
+                </div>
+                </details>
+                <br>
+                
+                <details>
+                <br>
+                <summary><strong>Experimental result of simulated dataset</strong> (click to expand) </summary>
+                <div class="result_table">
+                    <img src = "src/fig/sim_results.PNG"> <br>
+                </div>
+                </details>
+                <br>
+                
+                <details>
+                <br>
+                <summary><strong>Real-world experimental result</strong> (click to expand) </summary>
+                <div class="real_experiment">
+                    <img src = "src/fig/Real_exp.png"> <br>
+                </div>
+                </details>
+            </td>
+        </tr>
+    </left>
+    <center>
+        <tr>
+            <td>
+                <br>
+                <h2>Real-world demo</h2>
+                <div class="demo">
+                    <img src = "src/fig/Demo.png"> <br>
+                    <table style="width: 960px; max-width: 100%; border: 1px solid black;">
+                        <tr>
+                            <th style="border: 1px solid black; width: 320px;">Measured speech</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <h2>Audio samples</h2>
+                <div class="simulated">
+                    <img src = "src/fig/Dataset.png"> <br>
+                    <table style="width: 960px; max-width: 100%; border: 1px solid black;">
+                        <tr>
+                            <th style="border: 1px solid black; width: 60px;">#</th>
+                            <th style="border: 1px solid black; width: 225px;" colspan="4">Spectrogram and audio clips</th>                           
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; width: 60px;" rowspan="4">1</th>
+                            <th style="border: 1px solid black; width: 225px;">Noisy</th>
+                            <th style="border: 1px solid black; width: 225px;">Reference</th>
+                            <th style="border: 1px solid black; width: 225px;">Circular</th>
+                            <th style="border: 1px solid black; width: 225px;">Rectangular</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_reference.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_reference.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_reference_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_reference_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_circular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_circular_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_rectangular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_rectangular_enhanced.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; width: 225px;">Linear</th>
+                            <th style="border: 1px solid black; width: 225px;">Tetrahedron</th>
+                            <th style="border: 1px solid black; width: 225px;">Random</th>
+                            <th style="border: 1px solid black; width: 225px;">Clean</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_linear_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_linear_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_tetrahedron_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_tetrahedron_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/noisy_audio_random_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/noisy_audio_random_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip1/clean_audio.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip1/clean_audio.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+
+                        <tr>
+                            <th style="border: 1px solid black; width: 60px;" rowspan="4">2</th>
+                            <th style="border: 1px solid black; width: 225px;">Noisy</th>
+                            <th style="border: 1px solid black; width: 225px;">Reference</th>
+                            <th style="border: 1px solid black; width: 225px;">Circular</th>
+                            <th style="border: 1px solid black; width: 225px;">Rectangular</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_reference.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_reference.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_reference_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_reference_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_circular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_circular_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_rectangular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_rectangular_enhanced.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; width: 225px;">Linear</th>
+                            <th style="border: 1px solid black; width: 225px;">Tetrahedron</th>
+                            <th style="border: 1px solid black; width: 225px;">Random</th>
+                            <th style="border: 1px solid black; width: 225px;">Clean</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_linear_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_linear_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_tetrahedron_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_tetrahedron_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/noisy_audio_random_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/noisy_audio_random_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip2/clean_audio.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip2/clean_audio.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+
+                        <tr>
+                            <th style="border: 1px solid black; width: 60px;" rowspan="4">3</th>
+                            <th style="border: 1px solid black; width: 225px;">Noisy</th>
+                            <th style="border: 1px solid black; width: 225px;">Reference</th>
+                            <th style="border: 1px solid black; width: 225px;">Circular</th>
+                            <th style="border: 1px solid black; width: 225px;">Rectangular</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_reference.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_reference.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_reference_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_reference_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_circular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_circular_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_rectangular_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_rectangular_enhanced.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; width: 225px;">Linear</th>
+                            <th style="border: 1px solid black; width: 225px;">Tetrahedron</th>
+                            <th style="border: 1px solid black; width: 225px;">Random</th>
+                            <th style="border: 1px solid black; width: 225px;">Clean</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_linear_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_linear_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_tetrahedron_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_tetrahedron_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/noisy_audio_random_enhanced.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/noisy_audio_random_enhanced.wav" type="audio/wav"></audio></div></td>
+                            <td style="text-align: center; border: 1px solid black;"><div class="sample_imag"><img src="src/fig/clip3/clean_audio.PNG"><audio controls style="width: 100%;"><source src="src/audio/clip3/clean_audio.wav" type="audio/wav"></audio></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </center>
+</body>
+
+</html>
